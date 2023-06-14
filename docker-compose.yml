@@ -7,6 +7,7 @@ services:
     depends_on:
       - wekan
       - grafana
+      - pgadmin
 
   wekan:
     image: wekanteam/wekan
@@ -21,9 +22,9 @@ services:
       - mongo
     command: sh -c "sleep 10 && echo 'Creating default user...' && \
                     echo '{
-                      \"email\": \"benutzer@example.com\",
-                      \"password\": \"benutzer\",
-                      \"username\": \"benutzer\"
+                      \"email\": \"admin@example.com\",
+                      \"password\": \"admin\",
+                      \"username\": \"admin\"
                     }' | node main.js"
 
   mongo:
@@ -37,6 +38,14 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     volumes:
       - grafana_data:/var/lib/grafana
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
 
 volumes:
   grafana_data:
