@@ -15,7 +15,6 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo:27017/wekan
       - ROOT_URL=http://localhost:8080
-      - DISABLE_REGISTRATION=true
     volumes:
       - wekan_data:/app/uploads
     depends_on:
