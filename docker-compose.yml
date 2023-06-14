@@ -21,9 +21,9 @@ services:
       - mongo
     command: sh -c "sleep 10 && echo 'Creating default user...' && \
                     echo '{
-                      \"email\": \"admin@example.com\",
-                      \"password\": \"admin\",
-                      \"username\": \"admin\"
+                      \"email\": \"benutzer@example.com\",
+                      \"password\": \"benutzer\",
+                      \"username\": \"benutzer\"
                     }' | node main.js"
 
   mongo:
