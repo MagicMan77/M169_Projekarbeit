@@ -13,16 +13,20 @@ services:
     ports:
       - 8080:8080
     environment:
-      - MONGO_URL=mongodb://mongo:27017/wekan
+      - MONGO_URL=postgres://username:password@postgres:5432/wekan
       - ROOT_URL=http://localhost:8080
       - DISABLE_REGISTRATION=true
     volumes:
       - wekan_data:/app/uploads
     depends_on:
-      - mongo
+      - postgres
 
-  mongo:
-    image: mongo:4.4
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=wekan
 
   grafana:
     image: grafana/grafana
