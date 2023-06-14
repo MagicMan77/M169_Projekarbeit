@@ -21,10 +21,10 @@ services:
     depends_on:
       - mongo
     command: sh -c "sleep 10 && echo 'Creating default user...' && \
-                    echo '{
-                      \"email\": \"admin@example.com\",
-                      \"password\": \"admin\",
-                      \"username\": \"admin\"
+                    echo '{ \
+                      \"email\": \"admin@example.com\", \
+                      \"password\": \"admin\", \
+                      \"username\": \"admin\" \
                     }' | node main.js"
 
   mongo:
