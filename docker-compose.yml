@@ -16,11 +16,13 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo:27017/wekan
       - ROOT_URL=http://localhost:8080
+      - DISABLE_REGISTRATION=true
+      - DEFAULT_USER_USERNAME=benutzer
+      - DEFAULT_USER_PASSWORD=benutzer
     volumes:
       - wekan_data:/app/uploads
     depends_on:
       - mongo
-    command: sh -c "sleep 10 && echo 'Creating default user...' && echo '{ \"email\": \"benutzer@example.com\", \"password\": \"benutzer\", \"username\": \"benutzer\" }' | node main.js"
 
   mongo:
     image: mongo:4.4
