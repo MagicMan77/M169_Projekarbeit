@@ -19,6 +19,12 @@ services:
       - wekan_data:/app/uploads
     depends_on:
       - mongo
+    command: sh -c "sleep 10 && echo 'Creating default user...' && \
+                    echo '{
+                      \"email\": \"admin@example.com\",
+                      \"password\": \"admin\",
+                      \"username\": \"admin\"
+                    }' | node main.js"
 
   mongo:
     image: mongo:4.4
