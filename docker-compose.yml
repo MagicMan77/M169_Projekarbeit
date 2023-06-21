@@ -7,7 +7,7 @@ services:
     depends_on:
       - wekan
       - grafana
-
+      - pgadmin
   wekan:
     image: wekanteam/wekan
     ports:
@@ -15,20 +15,17 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo:27017/wekan
       - ROOT_URL=http://localhost:8080
-      - AUTOSCALE_ENABLED=true
-      - MAX_REPLICAS=10
-      - MIN_REPLICAS=2
-      - CPU_THRESHOLD=80
+      - DISABLE_REGISTRATION=true
+      - DEFAULT_USER_USERNAME=benutzer
+      - DEFAULT_USER_PASSWORD=benutzer
     volumes:
       - wekan_data:/app/uploads
     depends_on:
       - mongo
-    command: bash -c "scripts/start_wekan.sh"
-    restart: always
+    command: sh -c "sleep 10 && echo 'Creating default user...' && echo '{ \"email\": \"benutzer@example.com\", \"password\": \"benutzer\", \"username\": \"benutzer\" }' | node main.js"
 
   mongo:
     image: mongo:4.4
-
   grafana:
     image: grafana/grafana
     ports:
@@ -37,7 +34,13 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     volumes:
       - grafana_data:/var/lib/grafana
-
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
 volumes:
   grafana_data:
   wekan_data:
