@@ -22,8 +22,7 @@ services:
       - wekan_data:/app/uploads
     depends_on:
       - mongo
-    command: sh -c "sleep 10 && echo 'Creating default user...' && echo '{ \"email\": \"benutzer@example.com\", \"password\": \"benutzer\", \"username\": \"benutzer\" }' | node main.js"
-
+    command: node initialize.js
   mongo:
     image: mongo:4.4
   grafana:
