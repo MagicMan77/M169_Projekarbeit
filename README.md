@@ -28,7 +28,7 @@ __Container ausführen:__
 * docker container up -d
 
 __Container Stoppen:__
-* docker container stopp
+* docker container stop
 
 __Container anzeigen:__
 * docker ps (-a)
